@@ -3,7 +3,12 @@
 <div class="row">
     <h1 class="text-center">New Campground</h1>
     <div class="col-6 offset-3">
-        <form action="/campgrounds" method="post" class="non-validated" novalidate>
+        <form 
+            action="/campgrounds" 
+            method="post" 
+            class="non-validated" 
+            enctype="multipart/form-data"
+            novalidate>
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="campground[title]" placeholder="title" required>
@@ -14,11 +19,7 @@
                 <input class="form-control" type="text" id="location" name="campground[location]" placeholder="location" required>
                 <div class="valid-feedback">Looks great!</div>
             </div> 
-            <div class="mb-3">
-                <label class="form-label" for="image">Image</label>
-                <input class="form-control" type="text" id="image" name="campground[image]" placeholder="Image url" required>
-                <div class="valid-feedback">Looks great!</div>
-            </div> 
+            
             <div class="mb-3">
                 <label class="form-label" for="price">Campground price</label>
                 <div class="input-group">
@@ -31,6 +32,12 @@
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description" name="campground[description]" placeholder="location" required></textarea>
                 <div class="valid-feedback">Looks great!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="campImage">Add image(s)...</label>
+                <div class="input-group">
+                    <input class="form-control" type="file" id="campImage" name="image" multiple>
+                </div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-success">Save</button>

@@ -12,13 +12,17 @@ const sample = arr => arr[Math.floor(Math.random() * arr.length)]
 const seedDB = async() => {
     await Campground.deleteMany({});
     
-    for (let i = 0; i <= 50; i++) {
+    for (let i = 0; i <= 10; i++) {
         const rand1000 = Math.floor(Math.random() * 1000);
         await new Campground({
           location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
+          geometry: { type: 'Point', coordinates: [-75.690057, 45.421144] },
           title: `${sample(descriptors)} ${sample(places)}`,
           author: "6430d30c867188bfc8f038f8",
-          image: `https://source.unsplash.com/collection/483251/in-the-woods`,
+          images: [{ 
+            url: "https://res.cloudinary.com/dmon3plvd/image/upload/v1681088145/YelpCamp/ba3zxgdx2rcld4demhra.jpg",
+            filename: "YelpCamp/ba3zxgdx2rcld4demhra",
+          }],
           description:
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti tempora delectus nobis libero animi ab repellendus aperiam error doloribus. Aut quasi itaque odit velit maxime nulla aspernatur similique commodi architecto!",
           price: Math.floor(Math.random() * 25) + 10,

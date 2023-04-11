@@ -1,3 +1,7 @@
+// Hide development keys from the public
+if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 /* package dependencies */
 const express = require('express'),
       app = express(),

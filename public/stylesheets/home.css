@@ -1,0 +1,56 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 0.15rem 0.1rem rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.7);
+}
+
+.cover-container {
+    max-width: 60vw;
+}
+
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 700;
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+}
+
+.contact-link:hover, .nav-link:hover {
+    color: rgba(28, 236, 233, 0.983);
+    border-bottom-color: rgba(28, 236, 233, 0.983);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color: white;
+}
+
+.btn-light{
+    text-shadow: none;
+}
+.btn-light:hover {
+    background-color: transparent;
+    color: rgba(28, 236, 233, 0.983);
+}
+
+footer{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+footer p{
+    text-decoration: underline;
+    font-style: italic;
+    color: white;
+}
+
+.contact-link{
+    margin-top: 0;
+    text-decoration: none;
+    color: #0dcaf0;
+    border-bottom: 0.25rem solid transparent;
+}

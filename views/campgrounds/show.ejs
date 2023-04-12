@@ -2,11 +2,9 @@
 <% layout('layouts/boilerplate') %> 
 
 <div class="row">
-    
-    <div class="col-6">
-        <h1><%= campground.title %> details</h1>
+    <h1><%= campground.title %> details</h1>
+    <div class="col-sm-12 col-md-6">
         <div class="card mb-3">
-            <div id="location" style="width: 335px; height: 200px;"></div>
             <div id="campCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <% for(let i = 0; i <campground.images.length; i++) {%>
@@ -24,7 +22,7 @@
                         <div 
                         class="carousel-item <%=i === 0 ?'active' : ''%>"
                         data-bs-interval="10000">
-                            <img src="<%= img.url %>" class="d-block w-100" alt="campground image">
+                            <img src="<%= img.url %>" class="d-block w-100" alt="campground image" crossorigin="anonymous">
                         </div>
                     <% }) %>
                 </div>
@@ -52,18 +50,20 @@
             </ul>
             <% if(currentUser && campground.author.equals(currentUser._id)){ %>
                 <div class="card-body">
-                    <a href="/campgrounds/<%= campground._id %>/edit" class=" btn btn-warning card-link">Edit</a>
+                    <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-warning card-link">Edit</a>
                     <form class="d-inline" action="/campgrounds/<%=campground._id %>?_method=DELETE" method="post">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             <% } %>
             <div class="card-footer text-muted">
-                2 days ago
+                Some time ago...
             </div>
         </div> 
     </div>
-    <div class="col-6">
+    <div class="col-sm-12 col-md-6 mb-3">
+        <div id="location_map" class="mb-3"></div>
+
         <% if(currentUser) {%>
             <form class="mb-3 non-validated" action="/campgrounds/<%=campground._id %>/reviews" method="post" novalidate>
                 <h5>Add your Review</h5>
@@ -111,16 +111,17 @@
     </div>
 </div>
 
-<script>
+<script crossorigin="anonymous">
     const camp = <%-JSON.stringify(campground)%>;
-    console.log(camp);
     mapboxgl.accessToken = '<%=process.env.MAPBOX_TOKEN%>';
     const map = new mapboxgl.Map({
-        container: 'location', // container ID
+        container: 'location_map', // container ID
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
         center: camp.geometry.coordinates, // starting position [lng, lat]
         zoom: 12, // starting zoom
     });
+    map.addControl(new mapboxgl.NavigationControl());
+
     new mapboxgl.Marker()
         .setLngLat(camp.geometry.coordinates)
         .setPopup(

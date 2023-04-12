@@ -1,0 +1,19 @@
+#location_map {
+    width: 100%;
+    height: 200px;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+}
+
+@media (min-width: 768px) {
+    #location_map {
+        height: 21vw;
+        min-height: 200px;
+    }
+    #map {
+        height: 500px;
+    }
+}

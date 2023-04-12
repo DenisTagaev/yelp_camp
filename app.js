@@ -29,16 +29,18 @@ const useError = require('./utilities/Error');
 const User = require('./models/user');
 
 // for local connections
-const dbUrl = "mongodb://localhost:27017/yelp-camp";
+// const dbUrl = "mongodb://localhost:27017/yelp-camp";
+const dbUrl = process.env.DB || "mongodb://localhost:27017";
 mongoose.connect(dbUrl)
     .then(() => console.log('Mongo is CONNECTED'))
     .catch(err => console.log(err));
   
+const secret = process.env.SECRET;
 const store = MongoDBStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24*3600,
   crypto: {
-    secret: 'hackthis'
+    secret
   }
 });
 
@@ -47,7 +49,7 @@ store.on('error', e => console.log('Session error', e));
 const sessionConfig = { 
     store,
     name: 'Camp?strange',
-    secret: 'sessionKey',
+    secret,
     resave: false, 
     saveUninitialized: true,
     cookie: {

@@ -1,10 +1,12 @@
 const User = require("../models/user");
 
+//adding user data to the db
 module.exports.register = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
     const user = new User({ email: email, username: username });
     const regUser = await User.register(user, password);
+    //immediately redirecting user on successful login to the main page 
     req.login(regUser, (err) => {
       if (err) return next(err);
       req.flash("success", "Welcome to Yelp!");
@@ -16,6 +18,7 @@ module.exports.register = async (req, res, next) => {
   }
 };
 
+//trying to find user credentials in the db and logging in
 module.exports.checkLogIn = (req, res) => {
   req.flash("success", "Welcome back");
   const url = res.locals.origin ? res.locals.origin : "/campgrounds";

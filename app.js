@@ -31,6 +31,7 @@ const User = require('./models/user');
 // for local connections
 // const dbUrl = "mongodb://localhost:27017/yelp-camp";
 const dbUrl = process.env.DB || "mongodb://localhost:27017";
+//connect to the MongoDB server locale or remote and store the session data
 mongoose.connect(dbUrl)
     .then(() => console.log('Mongo is CONNECTED'))
     .catch(err => console.log(err));
@@ -43,7 +44,7 @@ const store = MongoDBStore.create({
     secret
   }
 });
-
+//show error in the process of deployment
 store.on('error', e => console.log('Session error', e));
 
 const sessionConfig = { 
@@ -59,8 +60,7 @@ const sessionConfig = {
     }
 };
 
-
-
+//define middlewares to use on the backend
 app.engine('ejs', EjsTemplates);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

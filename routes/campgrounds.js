@@ -10,8 +10,7 @@ const campgrounds = require('../controllers/campgrounds');
 
 const { isUser, validateCampground, isAuthor } = require('../middleware');
 
-
-
+//chaining the requests for the basic campgrounds on the index page
 router.route('/')
     .get(catchAsync(campgrounds.index))
     .post(
@@ -23,6 +22,7 @@ router.route('/')
       
 router.get('/new', isUser, campgrounds.newCampground);
 
+//chaining the requests for the selected campground on the show page
 router
   .route('/:id')
   .get(catchAsync(campgrounds.campgroundDetails))

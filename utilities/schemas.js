@@ -1,6 +1,7 @@
 const baseJoi = require('joi'),
     sanitizeHTML = require('sanitize-html');
 
+//adding security layer to eliminate basic SQL injections on the client side
 const extension = (joi) => ({
     type: 'string',
     base: joi.string(),
@@ -21,8 +22,10 @@ const extension = (joi) => ({
     }
 });
 
+//includes the security layer for the model
 const Joi = baseJoi.extend(extension);
 
+//campground schema
 module.exports.JoiSchema = Joi.object({
     campground: Joi.object({
         title: Joi.string().required().escapeHTML(),
@@ -33,6 +36,7 @@ module.exports.JoiSchema = Joi.object({
     deleteImages: Joi.array()
 });
 
+//review schema
 module.exports.JoiReview = Joi.object({
     review: Joi.object({
         rating: Joi.number().required().min(1).max(5),

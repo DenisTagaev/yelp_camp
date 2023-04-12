@@ -1,6 +1,7 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
+//review requirements schema
 const reviewSchema = new Schema({
     body: String,
     rating: Number,

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       passLocalMongoose = require('passport-local-mongoose');
-    
+   
+//registration requirements schema
 const UserSchema = new Schema({
     email: {
         type: String,

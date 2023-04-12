@@ -22,8 +22,9 @@
         </div>
     <% } %>
     <%- include('../elements/footer.ejs') %>
-    <script>
-        const token = '<%=process.env.MAPBOX_TOKEN%>';
-        const campgrounds = { features: <%-JSON.stringify(campgrounds)%> };
-    </script>  
+<!-- passing the camp data to the custom map  -->
+<script>
+    const token = '<%=process.env.MAPBOX_TOKEN%>';
+    const campgrounds = { features: <%-JSON.stringify(campgrounds)%> };
+</script>  
 <script src="/js/clusterMap.js"></script>

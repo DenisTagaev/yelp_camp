@@ -7,12 +7,15 @@ const ImgSchema = new Schema({
     filename: String,
 });
 
+//compressing the image for data saving during editing
 ImgSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/c_scale,w_200,h_150');
 });
 
+//including the thumbnail predownload from the remote
 const options = {toJSON: {virtuals: true}};
 
+//campground requirements schema
 const CampSchema = new Schema({
     title: String,
     images: [ImgSchema],
@@ -42,11 +45,13 @@ const CampSchema = new Schema({
     ]
 }, options);
 
+//customizing the popup when the pin on the map is clicked
 CampSchema.virtual('properties.popUpLink').get(function(){
     return `<h6><a href="/campgrounds/${this._id}">${this.title}</a></h6>
         <p>${this.description.substring(0,20)}...</p>`;
 })
 
+//cleaning the reviews for the campground deleted
 CampSchema.post('findOneAndDelete', async function(camp) {
     if(camp) {
         await Review.deleteMany({

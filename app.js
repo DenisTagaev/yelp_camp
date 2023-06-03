@@ -78,6 +78,7 @@ app.use(mongoSanitize({
 
 app.use(helmet());
 
+//trusted load sources
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
   "https://api.tiles.mapbox.com/",
